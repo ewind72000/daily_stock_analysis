@@ -4,10 +4,17 @@ name: abcde
 display_name: ABCDE量价战法
 description: 基于量价关系的技术分析策略，通过量比、换手率、PE等指标识别股票所处状态。
 category: trend
-core_rules: [1, 2, 3, 4, 5]
+core_rules: [1, 2, 3, 4, 5, 6, 7]
 required_tools:
   - get_daily_history
+  - get_realtime_quote
   - get_stock_info
+
+# 默认激活
+default_active: true
+default_router: false
+default_priority: 50
+market_regimes: [trending_up, volatile]
 
 instructions: |
   # ABCDE 量价战法
@@ -83,32 +90,23 @@ instructions: |
   ## 指标计算方式
 
   ### 量比 (Volume Ratio)
-  ```
-  量比 = 当前成交量 / 过去5日平均成交量
   - 量比 > 3: 异常放量
   - 量比 2-3: 温和放量
   - 量比 1-2: 正常放量
   - 量比 0.8-1: 缩量
   - 量比 < 0.8: 极度缩量
-  ```
 
   ### 换手率 (Turnover Rate)
-  ```
-  换手率 = 当日成交量 / 流通股本 × 100%
   - 换手率 > 15%: 极高换手，主力可能出货
   - 换手率 8%-15%: 高换手，需警惕
   - 换手率 5%-8%: 活跃换手，趋势延续
   - 换手率 3%-5%: 温和换手，可能启动
   - 换手率 < 3%: 低换手，观望为主
-  ```
 
   ### 动态PE
-  ```
-  动态PE = 当前股价 / 年度预估每股收益
   - PE < 行业平均: 低估值
   - PE ≈ 行业平均±10%: 合理估值
   - PE > 行业平均50%+: 高估值，风险大
-  ```
 
   ---
 
